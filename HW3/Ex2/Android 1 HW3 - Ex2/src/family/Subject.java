@@ -3,13 +3,14 @@ package family;
 import java.util.Random;
 import java.util.Vector;
 
+import common.Listeners;
 import common.Pet;
 
 
 
 public abstract class Subject implements Pet, Runnable {
 	
-	Vector<FamilyMember> listeners = new Vector<FamilyMember>();
+	Vector<Listeners> listeners = new Vector<Listeners>();
 	String name;
 	private boolean hungry;
 	private boolean treated;
@@ -21,12 +22,12 @@ public abstract class Subject implements Pet, Runnable {
 		treated = false;
 	}
 	
-	public void addLlistener(FamilyMember fm) {
-		listeners.add(fm);
+	public void addLlistener(Listeners listener) {
+		listeners.add(listener);
 	}
 
-	public void removeListener(FamilyMember fm) {
-		listeners.remove(fm);
+	public void removeListener(Listeners listener) {
+		listeners.remove(listener);
 	}
 	
 	public boolean isHungry() {
@@ -42,6 +43,9 @@ public abstract class Subject implements Pet, Runnable {
 		return treated;
 	}
 	
+	public void setThreated(boolean treated) {
+		this.treated = treated;
+	}
 	public String getName() {
 		return name;
 	}
@@ -50,7 +54,7 @@ public abstract class Subject implements Pet, Runnable {
 		return new Random().nextInt(MAX_SLEEP_TIME);
 	}
 	
-	private void getSleep() throws InterruptedException {
+	protected void getSleep() throws InterruptedException {
 		Thread.sleep(getRandomSleepTime());
 	}
 	
@@ -63,12 +67,25 @@ public abstract class Subject implements Pet, Runnable {
 		while(true) {
 			if (!isHungry()) {
 				setHungry(true);
+				setThreated(false);
 			}
 			getSleep();
 			notifyListeners();
 		}
 		
 		
+	}
+	
+	@Override
+	public void run() {
+		while (true) {
+			try {
+				lifeCycle();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 	

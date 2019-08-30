@@ -20,33 +20,19 @@ public class Dog extends Subject implements Pet {
 	@Override
 	public void lifeCycle() throws InterruptedException {
 		super.lifeCycle();
+		getSleep();
+		setHaveWalked(false);
+		notifyListeners();
+		
+		
 	}
 
-	private boolean isHaveWalked() {
+	public boolean isHaveWalked() {
 		return haveWalked;
 	}
 	
-	private void setHaveWalked(boolean haveWalked) {
+	public void setHaveWalked(boolean haveWalked) {
 		this.haveWalked = haveWalked;
-	}
-	
-	@Override
-	protected void notifyListeners() {
-		setHaveWalked(false);
-		super.notifyListeners();
-		
-		
-	}
-	
-	
-
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	
-	
+	}	
 }
  

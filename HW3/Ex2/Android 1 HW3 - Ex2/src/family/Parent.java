@@ -1,5 +1,7 @@
 package family;
 
+import java.awt.Event;
+
 import common.Food;
 import common.Listeners;
 
@@ -14,10 +16,7 @@ public class Parent extends FamilyMember implements Listeners  {
 		this.food = food;
 	}
 	
-	@Override
-	public void care(Subject subj) {
-		
-	}
+	
 	
 	
 	
