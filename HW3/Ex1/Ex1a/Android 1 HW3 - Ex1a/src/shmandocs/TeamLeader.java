@@ -1,8 +1,6 @@
 package shmandocs;
 
 import java.util.Vector;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import common.Task;
 
@@ -10,7 +8,6 @@ public class TeamLeader implements Runnable {
 
 	private Vector<Task> tasksPool;
 	private int maxTaskPoolSize;
-	private ExecutorService executor;
 	private int taskID = 0;
 
 	public TeamLeader(Vector<Task> tasksPool, int poolSize) {

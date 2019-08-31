@@ -16,6 +16,15 @@ public class Parent extends FamilyMember implements Listeners  {
 		this.food = food;
 	}
 	
+	@Override
+	public synchronized void care(Subject subj, NEEDS need) {
+		if (!(subj.isTreated())) {
+			super.care(subj, need);
+			food.getPortion();
+			System.out.println(food.getAmount() + " kg of food is left");
+		}
+	}
+	
 	
 	
 	

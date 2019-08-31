@@ -14,22 +14,16 @@ public class Child extends FamilyMember implements Listeners {
 	}
 	
 	@Override
-	public void care(Subject subj) {
-		super.care(subj);
-		if (subj instanceof Dog) {
-			if (!((Dog) subj).isHaveWalked()) {
-				takeAWalk((Dog)subj);
-				System.out.println(getName() + " walked with " + subj.getName());
-			}
-		}
+	public synchronized void care(Subject subj, NEEDS need) {
 		
-	}
-	
-	private void takeAWalk(Dog dog) {
-		dog.setHaveWalked(true);
-	}
-
-	
-	
+		if (need == NEEDS.WALK)
+			///if (!((Dog) subj).isHaveWalked()) {
+				((Dog) subj).setHaveWalked(true);
+				//((Dog)subj).setThreated(true);
+				System.out.println(getName() + " walked with " + subj.getName());
+		
+		
+		
+	}	
 
 }
