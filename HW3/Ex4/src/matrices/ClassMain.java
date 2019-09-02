@@ -5,6 +5,8 @@ import java.util.Vector;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import common.ThreadPool;
+
 public class ClassMain {
 	public static void main(String[] args) {
 		int numberOfThreads = 0;
@@ -75,25 +77,29 @@ public class ClassMain {
 				matrices.get(i).populateMatrix();
 			}
 
-			ExecutorService executor = Executors.newFixedThreadPool(numberOfThreads);
-
+			ThreadPool threadPool = new ThreadPool(numberOfThreads);
 			for (int i = 0; i < numberOfMatrices - 1; i++) {
-				executor.execute(matrices.set(i + 1, matrices.get(i).multiply(matrices.get(i + 1))));
+				try {
+					threadPool.execute(matrices.set(i + 1, matrices.get(i).multiply(matrices.get(i + 1))));
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 
-			executor.shutdown();
+			threadPool.shutdown();
 
 			matrices.lastElement().print();
 
 			matrices.clear();
-
+			
 			String quit;
-			
-			
 			do {
-				
+
 				System.out.println("Continue (Y/N)?: ");
-				quit = s.nextLine().toString();
+				
+				
+				quit = s.nextLine();
 
 			} while (!quit.equals("y") && !quit.equals("Y") && !quit.equals("n") && !quit.equals("N"));
 
@@ -102,7 +108,7 @@ public class ClassMain {
 				break;
 			}
 		}
-		s.close();
 		System.out.println("Exiting...");
+		s.close();
 	}
 }
