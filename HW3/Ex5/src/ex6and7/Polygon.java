@@ -30,7 +30,13 @@ public class Polygon implements Shape, Serializable {
 		int perimeter = 0;
 		
 		if (points.length != 0) {
-			
+			for (int i = 0; i < points.length; i++) {
+				if ((i + 1) == points.length) {
+					perimeter +=  points[i].calculateDistance(points[0]);
+				} else {
+					perimeter += points[i].calculateDistance(points[i + 1]);
+				}
+			}
 		}
 		return perimeter;
 	}
