@@ -26,4 +26,13 @@ public class Point {
 		return (int) Math.sqrt(Math.pow((b.getX() - this.getX()), 2) + Math.pow((b.getY() - this.getY()), 2) );
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		if (((Point) obj).getX() == this.getX() || ((Point) obj).getY() == this.getY()) {
+			return true;
+		}
+		
+		return false;
+	}
+	
 }

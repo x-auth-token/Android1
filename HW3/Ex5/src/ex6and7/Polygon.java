@@ -42,13 +42,21 @@ public class Polygon implements Shape, Serializable {
 	}
 	@Override
 	public boolean contains(Point point) {
-		// TODO Auto-generated method stub
+		for (Point p : points) {
+			if (p.equals(point)) {
+				return true;
+			}
+		}
 		return false;
 	}
 
 	@Override
 	public boolean intersect(Rectangular rect) {
-		// TODO Auto-generated method stub
+		for (Point p : points) {
+			if (p.equals(rect.getBottomLeft()) || p.equals(rect.getTopRight())) {
+				return true;
+			}
+		}
 		return false;
 	}
 	
